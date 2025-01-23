@@ -24,9 +24,9 @@ class Execute:
                     result[c.group()] = file_path
         paths.files_extracted_from_sap = result
         
-        print(paths.files_extracted_from_sap)
+        #print(paths.files_extracted_from_sap)
             
-        #Planilhas.tratar_dados(paths)
+        Planilhas.tratar_dados(paths)
     
     @staticmethod 
     def start_with_sap():
