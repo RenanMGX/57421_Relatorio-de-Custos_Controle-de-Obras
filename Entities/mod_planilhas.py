@@ -1,11 +1,12 @@
 import os
-import multiprocessing
+import xlwings as xw
 from typing import List, Dict
-multiprocessing.freeze_support()
 from Entities.dependencies.logs import Logs
 from Entities.dependencies.functions import P
 from Entities.tratar_dados import TratarDados
 from Entities.utils import Paths
+import multiprocessing
+multiprocessing.freeze_support()
 
 class Planilhas:
     @staticmethod
@@ -32,6 +33,7 @@ class Planilhas:
         for queue in queues:
             print(queue.get())
         
+        
     @staticmethod
     def __tratar_errors(paths:Paths, centro:str) -> bool:
         if (p:=paths.files_to_modificated.get(centro)):
@@ -51,10 +53,6 @@ class Planilhas:
             return False
         
         return True
-        
-        
-        
                         
 if __name__ == "__main__":
     pass
-

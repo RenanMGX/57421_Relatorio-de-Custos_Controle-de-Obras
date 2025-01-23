@@ -1,5 +1,6 @@
 import xlwings as xw
 from xlwings.main import Sheet
+from xlwings.main import App
 import pandas as pd
 import os
 import shutil
@@ -7,7 +8,6 @@ from Entities.dependencies.logs import Logs, traceback
 from Entities.dependencies.functions import Functions, P
 import multiprocessing
 multiprocessing.freeze_support()
-
 
 def exec(*, file_extrac_from_sap:str, file_to_modificate:str, expurgos:list|None):
     df = pd.read_excel(file_extrac_from_sap)
