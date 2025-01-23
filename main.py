@@ -9,7 +9,7 @@ import os
 
 class Execute:
     @staticmethod
-    def start(with_sap:bool):
+    def start(with_sap:bool=True):
         paths = Paths(Config()['paths']['sharepoint'])
         
         if with_sap:
@@ -28,9 +28,6 @@ class Execute:
             
         Planilhas.tratar_dados(paths)
     
-    @staticmethod 
-    def start_with_sap():
-        Execute.start(with_sap=True)
         
     @staticmethod 
     def start_with_not_sap():
@@ -38,6 +35,6 @@ class Execute:
         
 if __name__ == "__main__":
     Arguments({
-        'start_with_sap': Execute.start_with_sap,
+        'start': Execute.start,
         'start_with_not_sap': Execute.start_with_not_sap
     })
