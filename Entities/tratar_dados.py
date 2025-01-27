@@ -11,6 +11,17 @@ multiprocessing.freeze_support()
 
 def exec(*, file_extrac_from_sap:str, file_to_modificate:str, expurgos:list|None):
     df = pd.read_excel(file_extrac_from_sap)
+    
+    df = df[
+        (df['Classe de custo'].astype(str).str.startswith('41')) &
+        (df['Denomin.da conta de contrapartida'].str.lower().replace(' ', '') != "CUSTO DE TERRENO".lower().replace(' ', '')) &
+        (df['Denomin.da conta de contrapartida'].str.lower().replace(' ', '') != "TERRENOS".lower().replace(' ', '')) &
+        (df['Denomin.da conta de contrapartida'].str.lower().replace(' ', '') != "ESTOQUE DE TERRENOS".lower().replace(' ', '')) &
+        (df['Denomin.da conta de contrapartida'].str.lower().replace(' ', '') != "ESTOQUE DE TERRENO".lower().replace(' ', '')) &
+        (df['Denomin.da conta de contrapartida'].str.lower().replace(' ', '') != "T. ESTOQUE INICIAL".lower().replace(' ', '')) &
+        (df['Denomin.da conta de contrapartida'].str.lower().replace(' ', '') != "T.  EST. TERRENOS".lower().replace(' ', ''))             
+    ]
+    
     app = xw.App(visible=False)
     with app.books.open(file_to_modificate) as wb:
         ws:Sheet = wb.sheets['BD_SAP']

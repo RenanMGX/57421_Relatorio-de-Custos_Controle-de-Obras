@@ -9,8 +9,16 @@ import multiprocessing
 multiprocessing.freeze_support()
 
 class Planilhas:
+    """Classe responsável por processar planilhas e tratar dados de custos e expurgos."""
+
     @staticmethod
     def tratar_dados(paths:Paths):
+        """
+        Percorre a lista de centros fornecida pelo objeto Paths, validando arquivos e
+        gerando processos de tratamento de dados, cada um com sua própria fila de retorno.
+
+        :param paths: Instância de Paths contendo informações sobre arquivos e expurgos.
+        """
         queues:List[multiprocessing.Queue] = []
         
         expurgos:dict = paths.expurgo.peps
@@ -36,6 +44,14 @@ class Planilhas:
         
     @staticmethod
     def __tratar_errors(paths:Paths, centro:str) -> bool:
+        """
+        Verifica se os arquivos necessários para tratar o centro informado existem e
+        registra eventuais erros em log.
+
+        :param paths: Instância de Paths contendo caminhos e configurações.
+        :param centro: Código do centro a ser validado.
+        :return: True se os arquivos forem válidos, False caso contrário.
+        """
         if (p:=paths.files_to_modificated.get(centro)):
             if not os.path.exists(p):
                 Logs().register(status='Report', description=f"o arquivo '{p}' não foi encontrado!")
