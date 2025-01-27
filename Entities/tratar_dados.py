@@ -12,6 +12,8 @@ multiprocessing.freeze_support()
 def exec(*, file_extrac_from_sap:str, file_to_modificate:str, expurgos:list|None):
     df = pd.read_excel(file_extrac_from_sap)
     
+    df = df.dropna(subset=['Elemento PEP'])
+        
     df = df[
         (df['Classe de custo'].astype(str).str.startswith('41')) &
         (~df['Elemento PEP'].str.lower().str.contains('POSO'.lower())) &
