@@ -18,9 +18,9 @@ def exec(*, file_extrac_from_sap:str, file_to_modificate:str, expurgos:list|None
         (df['Classe de custo'].astype(str).str.startswith('41')) &
         (~df['Elemento PEP'].str.lower().str.contains('POSO'.lower())) &
         (~df['Elemento PEP'].str.lower().str.contains('POCRCIAI'.lower())) &
-        (df['Denomin.da conta de contrapartida'].str.lower().replace(' ', '') != "ESTOQUE DE TERRENOS".lower().replace(' ', '')) &
-        (df['Denomin.da conta de contrapartida'].str.lower().replace(' ', '') != "T.  EST. TERRENOS".lower().replace(' ', '')) &
-        (df['Denomin.da conta de contrapartida'].str.lower().replace(' ', '') != "T. ESTOQUE INICIAL".lower().replace(' ', ''))
+        (df['Denomin.da conta de contrapartida'].str.lower().str.replace(' ', '') != "ESTOQUE DE TERRENOS".lower().replace(' ', '')) &
+        (df['Denomin.da conta de contrapartida'].str.lower().str.replace(' ', '') != "T.  EST. TERRENOS".lower().replace(' ', '')) &
+        (df['Denomin.da conta de contrapartida'].str.lower().str.replace(' ', '') != "T. ESTOQUE INICIAL".lower().replace(' ', ''))
     ]
     
     app = xw.App(visible=False)
