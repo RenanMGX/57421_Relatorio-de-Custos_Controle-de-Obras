@@ -32,7 +32,10 @@ def exec(*, file_extrac_from_sap:str, file_to_modificate:str, expurgos:list|None
     with app.books.open(file_to_modificate) as wb:
         ws:Sheet = wb.sheets['BD_SAP']
         
+        ws.api.AutoFilter.ShowAllData()
+        
         ws.range('A2', ws.cells.last_cell).clear_contents()
+        
         
         num_rows = len(df)
         formulas =[[f'=EOMONTH(F{x},-1)+1',
