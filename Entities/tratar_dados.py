@@ -23,6 +23,11 @@ def exec(*, file_extrac_from_sap:str, file_to_modificate:str, expurgos:list|None
         (df['Denomin.da conta de contrapartida'].str.lower().str.replace(' ', '') != "T. ESTOQUE INICIAL".lower().replace(' ', ''))
     ]
     
+    if expurgos:
+        df = df[
+            ~df['Elemento PEP'].isin(expurgos)
+        ]
+    
     app = xw.App(visible=False)
     with app.books.open(file_to_modificate) as wb:
         ws:Sheet = wb.sheets['BD_SAP']
