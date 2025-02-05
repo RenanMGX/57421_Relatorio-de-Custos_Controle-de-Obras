@@ -57,11 +57,13 @@ def exec(*, file_extrac_from_sap:str, file_to_modificate:str, expurgos:list|None
 class TratarDados:
     @staticmethod
     def start(queue:multiprocessing.JoinableQueue, file_to_modificate:str, file_extrac_from_sap:str, expurgos:list|None):
-        try:
-            return queue.put(exec(file_extrac_from_sap=file_extrac_from_sap, file_to_modificate=file_to_modificate, expurgos=expurgos))
-        except Exception as error:
-            Logs().register(status='Report', description=f"Erro ao tratar dados do arquivo '{file_to_modificate}'", exception=traceback.format_exc())
-            return queue.put(False)
+        for _ in range(5):
+            try:
+                return queue.put(exec(file_extrac_from_sap=file_extrac_from_sap, file_to_modificate=file_to_modificate, expurgos=expurgos))
+            except Exception as error:
+                Logs().register(status='Report', description=f"Erro ao tratar dados do arquivo '{file_to_modificate}'", exception=traceback.format_exc())
+                if _ == 4:
+                    return queue.put(False)
         
                     
 if __name__ == "__main__":
