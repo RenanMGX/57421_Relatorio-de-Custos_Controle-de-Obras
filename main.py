@@ -3,6 +3,7 @@ from Entities.mod_planilhas import Planilhas
 from Entities.utils import Paths
 from Entities.dependencies.arguments import Arguments
 from Entities.dependencies.config import Config
+from Entities.dependencies.sharepointfolder import SharePointFolders
 from datetime import datetime
 import re
 import os
@@ -10,7 +11,7 @@ import os
 class Execute:
     @staticmethod
     def start(with_sap:bool=True):
-        paths = Paths(Config()['paths']['sharepoint'])
+        paths = Paths(SharePointFolders(r'Janela da Engenharia Controle de Obras - Relatório de Custos').value)
         
         if with_sap:
             CJI3(date=datetime.now()).gerar_relatorios_SAP(objeto=paths)

@@ -104,7 +104,7 @@ class CJI3(SAPManipulation):
                             self.session.findById("wnd[0]/usr/ctxtCN_PSPNR-LOW").text = codigo_empreendimento # empreendimento
                             self.session.findById("wnd[0]/usr/ctxtR_BUDAT-LOW").text = self.initialDate
                             self.session.findById("wnd[0]/usr/ctxtR_BUDAT-HIGH").text = self.dateSTR
-                            self.session.findById("wnd[0]/usr/ctxtP_DISVAR").text = "/FABRICIO"
+                            self.session.findById("wnd[0]/usr/ctxtP_DISVAR").text = "RELATCUSTOS"
                             self.session.findById("wnd[0]/usr/btnBUT1").press()
                             self.session.findById("wnd[1]/usr/txtKAEP_SETT-MAXSEL").text = num_arquivos # valor 999999999
                             self.session.findById("wnd[1]/tbar[0]/btn[0]").press()
