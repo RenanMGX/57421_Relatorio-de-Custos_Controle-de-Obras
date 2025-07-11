@@ -138,7 +138,7 @@ class CJI3(SAPManipulation):
                             
                             objeto.files_extracted_from_sap[centro_custo] = file
                             
-                            sleep(3)
+                            sleep(10)
                             
                             Functions.fechar_excel(empreendimento_for_save)
                             

@@ -10,7 +10,12 @@ import multiprocessing
 multiprocessing.freeze_support()
 
 def exec(*, file_extrac_from_sap:str, file_to_modificate:str, expurgos:list|None):
-    df = pd.read_excel(file_extrac_from_sap)
+    df:pd.DataFrame
+    try:
+        df = pd.read_excel(file_extrac_from_sap)
+    except PermissionError:
+        Functions.fechar_excel(file_extrac_from_sap)
+        df = pd.read_excel(file_extrac_from_sap)
     
     df = df.dropna(subset=['Elemento PEP'])
         
